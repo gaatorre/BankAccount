@@ -12,20 +12,16 @@ struct savingsAccount_t {
 };
 
 // precondition - name must be the proper length;
-savingsAccount* SavingsAccountInit(int goal, char * name, double percent) {
+savingsAccount* SavingsAccountInit() {
   savingsAccount * temp = calloc(1, sizeof(savingsAccount));
   if (temp == NULL) {
     return NULL;
   }
 
-  if (memcpy(temp->name, name, strlen(name)) == NULL) {
-    SavingsAccountDestruct(temp);
-    return NULL;
-  }
-
+  temp->name[0] = '\0';
   temp->saved = 0.0;
-  temp->goal = goal;
-  temp->savingPercentage = percent;
+  temp->goal = 0.0;
+  temp->savingPercentage = 0.0;
 
   return temp;
 }
@@ -47,31 +43,39 @@ double SavingsAccountDeposit(savingsAccount *account, double deposit) {
   }
 }
 
-void SavingsAccountPrintName(savingsAccount *account) {
-  printf("Savings Account: %s\n", account->name);
-}
-
-static void printEverything(savingsAccount *account) {
-  SavingsAccountPrintName(account);
-  printf("Amount Saved: %.2f\n", account->saved);
-  printf("Goal Amount: %.2f\n", account->goal);
-  printf("Percent: %.2f\n\n", account->savingPercentage);
-}
+// void SavingsAccountPrintName(savingsAccount *account) {
+//   printf("Savings Account: %s\n", account->name);
+// }
+//
+// static void printEverything(savingsAccount *account) {
+//   SavingsAccountPrintName(account);
+//   printf("Amount Saved: %.2f\n", account->saved);
+//   printf("Goal Amount: %.2f\n", account->goal);
+//   printf("Percent: %.2f\n\n", account->savingPercentage);
+// }
 
 double SavingsAccountRemaining(savingsAccount *account) {
   return account->goal - account->saved;
 }
 
-int main(void) {
-  savingsAccount *temp = SavingsAccountInit(500, "Gabe's Account", 0.25);
-  printEverything(temp);
-
-  SavingsAccountDeposit(temp, 485);
-  printEverything(temp);
-
-  printf("Left Over: %d\n", SavingsAccountDeposit(temp, 15) == 0);
-  printEverything(temp);
-
-  SavingsAccountDestruct(temp);
-  return 0;
+int CheckingAccountLoadSavings(savingsAccount *savings, double goal,
+                                               char *name, double percent) {
+  savings->goal = goal;
+  savings->savingPercentage = percent;
+  memcpy(savings->name, name, strlen(name));
+  return 1;
 }
+
+// int main(void) {
+//   savingsAccount *temp = SavingsAccountInit(500, "Gabe's Account", 0.25);
+//   printEverything(temp);
+//
+//   SavingsAccountDeposit(temp, 485);
+//   printEverything(temp);
+//
+//   printf("Left Over: %d\n", SavingsAccountDeposit(temp, 15) == 0);
+//   printEverything(temp);
+//
+//   SavingsAccountDestruct(temp);
+//   return 0;
+// }

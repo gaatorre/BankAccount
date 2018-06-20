@@ -3,14 +3,14 @@
 
 #include "account.h"
 
-typedef struct checkingAccount_t checkingAccount
+typedef struct checkingAccount_t checkingAccount;
 
-checkingAccount * checkingAccountInit(int);
+checkingAccount * CheckingAccountInit(char *, double);
 
-void CheckingAccountDestruct();
+void CheckingAccountDestruct(checkingAccount *);
 
-int CheckingAccountDeposit(int);
+int CheckingAccountDeposit(checkingAccount *, double);
 
-int CheckingAccountWithDraw(int);
+int CheckingAccountWithDraw(checkingAccount *, double);
 
 #endif

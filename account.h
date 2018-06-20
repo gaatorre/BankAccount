@@ -9,4 +9,6 @@
 
 #define ACCOUNT_NAME_LENGTH 51 // 50 max characters for an account name
 
+#define MAX_SAVING_ACCOUNTS 4
+
 #endif

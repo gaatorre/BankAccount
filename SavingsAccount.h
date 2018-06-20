@@ -6,7 +6,7 @@
 
 typedef struct savingsAccount_t savingsAccount;
 
-savingsAccount* SavingsAccountInit(int, char *, double);
+savingsAccount* SavingsAccountInit();
 
 void SavingsAccountDestruct(savingsAccount *);
 
@@ -15,5 +15,7 @@ double SavingsAccountDeposit(savingsAccount *, double);
 void SavingsAccountPrintName(savingsAccount *);
 
 double SavingsAccountRemaining(savingsAccount *);
+
+int CheckingAccountLoadSavings(savingsAccount *, double, char *, double);
 
 #endif
