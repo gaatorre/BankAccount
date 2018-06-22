@@ -5,7 +5,6 @@
 #include "SavingsAccount.h"
 #include "CheckingAccount.h"
 
-
 struct checkingAccount_t {
   char name[ACCOUNT_NAME_LENGTH];
   double balance;
