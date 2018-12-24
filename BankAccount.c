@@ -31,12 +31,16 @@ int main() {
   static displayStates state = login;
   char selection = 0;
   checkingAccount *account;
+  winSize screenInfo;
 
   char userName[ACCOUNT_NAME_LENGTH];
   // int userInput = open();
 
   while(selection != 'q') {
-    updateScreen(state);
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &screenInfo);
+
+    updateScreen(state, &screenInfo);
+    // printf("Screen size is %dx%d\n", screenInfo.ws_row, screenInfo.ws_col);
     switch (state) {
       case overview:
         break;

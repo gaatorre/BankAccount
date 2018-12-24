@@ -3,11 +3,12 @@
 
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
+#include <sys/ioctl.h> // Needed for getting the size of the terminal
 
-#define BANNER "***********************************************************"
-#define BANNER_LENGTH 60
+#define BANNER '*'
+// #define BANNER_LENGTH 60
 #define PRINT_HEADER "%s\n%s\n%s\n"
-#define PADDING "                   "
+#define PADDING " "
 #define HEADER "Bank Account Manager - "
 #define OVERVIEW "Overview"
 #define LOGIN "Login"
@@ -19,12 +20,13 @@
 #define CLEAR_SCREEN "\033\143"
 
 typedef enum displayStates {overview, login, checking, savings, withdraw, newAccount} displayStates;
+typedef struct winsize winSize;
 
 void clearScreen(void);
 
 // Returns the size of the header
-int buildHeader(char *, char *);
+int buildHeader(char *, winSize *, char *);
 
-void updateScreen(displayStates);
+void updateScreen(displayStates, winSize *);
 
 #endif

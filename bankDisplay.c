@@ -1,6 +1,7 @@
 #include "bankDisplay.h"
 #include <stdio.h>
 #include <string.h>
+// TODO: Figure out the array sizes - maybe do it dynamically
 
 void clearScreen(void) {
   printf(CLEAR_SCREEN);
@@ -12,27 +13,35 @@ static void centerString(char *buffer, int columnMidPoint, char *string) {
     return;
 }
 
-int buildHeader(char *GUI, char *state) {
+int buildHeader(char *GUI, winSize *screen, char *state) {
   char temp[1024];
   memset(temp, ' ', 1024);
 
-  temp[0] = '*';
-  temp[58] = '*';
-  temp[59] = '\0';
-
-  char headerState[60];
+  char headerState[256];
   sprintf(headerState, "%s%s", HEADER, state);
 
-  centerString(temp, 60/2, headerState);
+  centerString(temp, screen->ws_col/2, headerState);
+  temp[0] = '*';
+  temp[screen->ws_col-1] = '*';
+  temp[screen->ws_col] = '\0';
 
-  return sprintf(GUI, PRINT_HEADER, BANNER, temp, BANNER);
+  char banner[300];
+  memset(banner, BANNER, screen->ws_col - 1);
+  banner[0] = ' ';
+  banner[screen->ws_col-1]=' ';
+  banner[screen->ws_col] = '\0';
+
+  return sprintf(GUI, PRINT_HEADER, banner, temp, banner);
 }
 
-int buildLogin(char *GUI) {
-  return sprintf(GUI, "%s%s", PADDING, "User Name: ");
+int buildLogin(char *GUI, winSize *screen) {
+  char temp[1024];
+  memset(temp, ' ', screen->ws_col/3);
+  temp[screen->ws_col/3] = '\0';
+  return sprintf(GUI, "%s%s", temp, "User Name: ");
 }
 
-void updateScreen(displayStates state) {
+void updateScreen(displayStates state, winSize *screen) {
   static char screenOutput[4096];
   memset(screenOutput, ' ', 4096);
   screenOutput[4095] = 0;
@@ -40,28 +49,28 @@ void updateScreen(displayStates state) {
 
   switch (state) {
     case overview:
-      index += buildHeader(screenOutput, OVERVIEW);
+      index += buildHeader(screenOutput, screen, OVERVIEW);
       break;
     case login:
-      index += buildHeader(screenOutput, LOGIN);
-      index += buildLogin(screenOutput + index);
+      index += buildHeader(screenOutput, screen, LOGIN);
+      index += buildLogin(screenOutput + index, screen);
       break;
     case checking:
-      index += buildHeader(screenOutput, CHECKING);
+      index += buildHeader(screenOutput, screen, CHECKING);
       break;
     case savings:
-      index += buildHeader(screenOutput, SAVINGS);
+      index += buildHeader(screenOutput, screen, SAVINGS);
       break;
     case withdraw:
-      index += buildHeader(screenOutput, WITHDRAW);
+      index += buildHeader(screenOutput, screen, WITHDRAW);
       break;
     case newAccount:
-      index += buildHeader(screenOutput, NEW_ACCOUNT);
+      index += buildHeader(screenOutput, screen, NEW_ACCOUNT);
     default:
       break;
   }
   index = 0;
-  
+
   clearScreen();
   printf("%s", screenOutput);
   return;
