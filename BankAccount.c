@@ -70,8 +70,8 @@ int main() {
         break;
     }
 
-    selection = getchar();
-    getchar();
+    // selection = getchar();
+    // getchar();
   }
 
   (void) account;
