@@ -10,6 +10,7 @@ void clearScreen(void) {
 static void centerString(char *buffer, int columnMidPoint, char *string) {
     int mid = strlen(string) / 2;
     memcpy(buffer + columnMidPoint - mid, string, strlen(string));
+    buffer[columnMidPoint * 2] = '\0';
     return;
 }
 
@@ -41,7 +42,38 @@ int buildLogin(char *GUI, winSize *screen) {
   return sprintf(GUI, "%s%s", temp, "User Name: ");
 }
 
-void updateScreen(displayStates state, winSize *screen) {
+int buildOverview(char *GUI, winSize *screen, checkingAccount *acc) {
+  char temp[1024];
+  memset(temp, ' ', 1024);
+  temp[1023]='\0';
+  char headerState[256];
+  sprintf(headerState, "Welcome, %s", acc->name);
+  centerString(temp, screen->ws_col/2, headerState);
+
+  GUI += sprintf(GUI, "%s\n", temp);
+
+  memset(temp, ' ', 1024);
+  sprintf(headerState, "Current Balance: %.2f", acc->balance);
+  centerString(temp, screen->ws_col/2, headerState);
+
+  GUI += sprintf(GUI, "%s\n", temp);
+
+  return 1;
+}
+
+void printOverviewOptions() {
+  // char temp[1024];
+  // memset(temp, ' ', screen->ws_col/3);
+  // temp[screen->ws_col/3] = '\0';
+
+  printf("\n\n    %s\n", "1) Deposit into checking account");
+  printf("    %s\n", "2) Withdraw from checking account");
+  printf("    %s\n", "3) Exit");
+  printf("    %s", "Selection: ");
+  return;
+}
+
+void updateScreen(displayStates state, winSize *screen, checkingAccount *acc) {
   static char screenOutput[4096];
   memset(screenOutput, ' ', 4096);
   screenOutput[4095] = 0;
@@ -50,6 +82,7 @@ void updateScreen(displayStates state, winSize *screen) {
   switch (state) {
     case overview:
       index += buildHeader(screenOutput, screen, OVERVIEW);
+      index += buildOverview(screenOutput + index, screen, acc);
       break;
     case login:
       index += buildHeader(screenOutput, screen, LOGIN);

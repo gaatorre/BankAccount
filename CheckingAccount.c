@@ -5,12 +5,6 @@
 #include "SavingsAccount.h"
 #include "CheckingAccount.h"
 
-struct checkingAccount_t {
-  char name[ACCOUNT_NAME_LENGTH];
-  double balance;
-  savingsAccount *savings[MAX_SAVING_ACCOUNTS];
-};
-
 checkingAccount *CheckingAccountInit(char *name, double balance) {
   checkingAccount *temp = calloc(1, sizeof(checkingAccount));
   if (temp == NULL) {

@@ -4,13 +4,6 @@
 #include "account.h"
 #include "SavingsAccount.h"
 
-struct savingsAccount_t {
-  char name[ACCOUNT_NAME_LENGTH];
-  double saved;
-  double goal;
-  double savingPercentage;
-};
-
 // precondition - name must be the proper length;
 savingsAccount* SavingsAccountInit() {
   savingsAccount * temp = calloc(1, sizeof(savingsAccount));

@@ -19,7 +19,7 @@
 #define NEW_ACCOUNT "New Account"
 #define CLEAR_SCREEN "\033\143"
 
-typedef enum displayStates {overview, login, checking, savings, withdraw, newAccount} displayStates;
+typedef enum displayStates {overview, login, checking, savings, withdraw, newAccount, quit} displayStates;
 typedef struct winsize winSize;
 
 void clearScreen(void);
@@ -27,6 +27,12 @@ void clearScreen(void);
 // Returns the size of the header
 int buildHeader(char *, winSize *, char *);
 
-void updateScreen(displayStates, winSize *);
+int buildLogin(char *, winSize *);
+
+int buildOverview(char *, winSize *, checkingAccount *);
+
+void printOverviewOptions();
+
+void updateScreen(displayStates, winSize *, checkingAccount *);
 
 #endif

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Wpedantic -Werror -std=c99 -g
-OBJECTS = bankDisplay.o SavingsAccount.o CheckingAccount.o BankAccount.o
+OBJECTS = SavingsAccount.o CheckingAccount.o bankDisplay.o BankAccount.o
 
 BankAccount: $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o BankAccount
