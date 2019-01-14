@@ -1,1 +1,4 @@
 # BankAccount
+As a young adult, one of my new responsibilities is managing my own money. I know I am supposed to save my money for a rainy day and save up for a big purchase, but I don’t know how to. When I see that I have $XXXX.XX in my bank account, I can’t help but see that I have $XXXX.XX available to spend. 
+
+Thus, I thought of creating a bank account manager terminal application that helps me divide my money into different “accounts.” By creating a classic savings and checking account and several other accounts to save up for things I want, I can divide my money up between the different accounts. Dividing my money this way will allow me to see how much uncommitted money is in my checking account and automatically save a percentage or a fixed number from my deposits into the several other saving accounts.
