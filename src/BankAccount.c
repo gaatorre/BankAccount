@@ -36,7 +36,7 @@ int main() {
   // int userInput = open();
 
   while(selection != 'q') {
-    updateScreen(state);
+    updateScreen(state, account);
     switch (state) {
       case overview:
         break;

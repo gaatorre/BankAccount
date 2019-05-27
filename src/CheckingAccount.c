@@ -9,6 +9,7 @@ struct checkingAccount_t {
   char name[ACCOUNT_NAME_LENGTH];
   double balance;
   savingsAccount *savings[MAX_SAVING_ACCOUNTS];
+  char numSavings;
 };
 
 checkingAccount *CheckingAccountInit(char *name, double balance) {
@@ -31,6 +32,8 @@ checkingAccount *CheckingAccountInit(char *name, double balance) {
       return NULL;
     }
   }
+
+  temp->numSavings = 0;
 
   return temp;
 }

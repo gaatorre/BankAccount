@@ -32,7 +32,17 @@ int buildLogin(char *GUI) {
   return sprintf(GUI, "%s%s", PADDING, "User Name: ");
 }
 
-void updateScreen(displayStates state) {
+int buildOverview(char *GUI) {
+  int runningTotal = 0;
+  char[120] temp;
+  sprintf(temp, "")
+
+  runningTotal +=
+
+  return runningTotal;
+}
+
+void updateScreen(displayStates state, checkingAccount *account) {
   static char screenOutput[4096];
   memset(screenOutput, ' ', 4096);
   screenOutput[4095] = 0;
@@ -41,6 +51,7 @@ void updateScreen(displayStates state) {
   switch (state) {
     case overview:
       index += buildHeader(screenOutput, OVERVIEW);
+      index += buildOverview();
       break;
     case login:
       index += buildHeader(screenOutput, LOGIN);
@@ -61,7 +72,7 @@ void updateScreen(displayStates state) {
       break;
   }
   index = 0;
-  
+
   clearScreen();
   printf("%s", screenOutput);
   return;

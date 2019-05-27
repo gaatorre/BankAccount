@@ -25,6 +25,10 @@ void clearScreen(void);
 // Returns the size of the header
 int buildHeader(char *, char *);
 
-void updateScreen(displayStates);
+int buildLogin(char *);
+
+int buildOverview(char *);
+
+void updateScreen(displayStates, checkingAccount *);
 
 #endif
