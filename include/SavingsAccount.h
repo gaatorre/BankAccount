@@ -4,7 +4,15 @@
 #include "account.h"
 #define SAVINGS_ACCOUNT_GOAL_REACHED 1
 
-typedef struct savingsAccount_t savingsAccount;
+// typedef struct savingsAccount_t savingsAccount;
+
+typedef struct savingsAccount_t {
+  char name[ACCOUNT_NAME_LENGTH];
+  double saved;
+  double goal;
+  double savingPercentage;
+} savingsAccount;
+
 
 savingsAccount* SavingsAccountInit();
 

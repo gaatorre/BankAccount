@@ -5,6 +5,7 @@
 #include "SavingsAccount.h"
 #include "CheckingAccount.h"
 
+<<<<<<< HEAD:src/CheckingAccount.c
 struct checkingAccount_t {
   char name[ACCOUNT_NAME_LENGTH];
   double balance;
@@ -12,6 +13,8 @@ struct checkingAccount_t {
   char numSavings;
 };
 
+=======
+>>>>>>> 33df31c6e8d84d2181510e993288c7f2d32766f7:CheckingAccount.c
 checkingAccount *CheckingAccountInit(char *name, double balance) {
   checkingAccount *temp = calloc(1, sizeof(checkingAccount));
   if (temp == NULL) {
